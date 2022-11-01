@@ -4,7 +4,7 @@
 
 \title{Tutorium 01: Haskell Basics}
 % \subtitle{}
-\author{David Kaufman}
+\author{David Kaufmann}
 \institute{Tutorium Programmierparadigmen am KIT}
 \date{02. November 2022}
 
@@ -22,6 +22,7 @@
                 \begin{itemize}
                         \item Für Feedback und Fragen
                 \end{itemize}
+                \item Ilias Forum für allgemeine Fragen
                 \item \url{https://github.com/KaufmannDavid/propa-tut}
                 \begin{itemize}
                         \item Folien
@@ -38,6 +39,7 @@
                 \item $\leadsto$ ÜBs zur eigenen Übung!
                 \item Abgabe:
                 \begin{itemize}
+                  \item Abgabe immer Donnerstag 12:00 Uhr
                   \item \url{https://praktomat.cs.kit.edu/pp_2022_WS/tasks/}
                   \item Wenn ihr die Abgabe verpasst habt auch per Mail
                 \end{itemize}
@@ -46,9 +48,10 @@
 
 \begin{frame}{Klausur}
         \begin{itemize}
-                \item Termin: teile ich mit sobald bekannt, meist April/Mai
+                \item 120 Minuten
+                \item Termin: teile ich mit sobald bekannt, meist spät
                 \item Papier-Materialien dürfen mitgebracht werden!
-                \item $\leadsto$ Skript, Mitschriebe, \enquote{Formelsammlung}
+                \item $\leadsto$ Skript, Mitschriebe, \enquote{Formelsammlung}, Musterlösungen
         \end{itemize}
 \end{frame}
 
@@ -82,6 +85,15 @@
   \end{itemize}
 \end{frame}
 
+\begin{frame}{Module}
+        \code{../demos/Maths.hs}
+
+        \begin{itemize}
+                \item Ein Haskell-Programm ist eine Folge von Funktionsdefinitionen.
+                \item Funktionen müssen keine Argumente haben.
+        \end{itemize}
+\end{frame}
+
 \begin{frame}[fragile]{GHCi}
         \code{code/ghci.output}
 
@@ -95,14 +107,6 @@
         \end{itemize}
 \end{frame}
 
-\begin{frame}{Module}
-        \code{../demos/Maths.hs}
-
-        \begin{itemize}
-                \item Ein Haskell-Programm ist eine Folge von Funktionsdefinitionen.
-                \item Funktionen müssen keine Argumente haben.
-        \end{itemize}
-\end{frame}
 
 \begin{frame}{REPL}
         \code{code/ghci-maths.output}
@@ -158,19 +162,31 @@
                 \item \texttt{sum3}, \texttt{sum4}, \texttt{sumX} zu schreiben ist irgendwie doof
                 \pause
                 \item Lösung des Problems: Listen
-                \item \texttt{[a]} ist der Typ einer Liste, deren Elemente von Typ \texttt{a} sind
-                \item $\leadsto$ Listen sind homogen, nur eine Art von Element
-        \end{itemize}
-
-        \code{../demos/Lists.hs}
-
-        \begin{itemize}
-                \item Ein Ausdruck des Typs \texttt{[a]} hat genau einen von zwei Werten:
+                \item Haben genau einen von zwei Werten:
                 \begin{itemize}
                         \item \texttt{[]} --- die leere Liste
                         \item \texttt{(h : t)} --- Element + Rest, mit \texttt{h :: a} und \texttt{t :: [a]}
                 \end{itemize}
         \end{itemize}
+
+        \code{../demos/Lists.hs}
+
+        \begin{itemize}
+                \item \texttt{[a]} ist der Typ einer Liste, deren Elemente von Typ \texttt{a} sind
+                \item $\leadsto$ Listen sind homogen, nur eine Art von Element
+        \end{itemize}
+\end{frame}
+
+\begin{frame}{Funktionen für Listen}
+    \begin{itemize}
+        \item \texttt{(++)}: Konkatenation von Listen
+        \item \texttt{(!!)}: Indexzugriff, 1. Argument: Liste, 2. Argument: Index
+        \item \texttt{head, last}: Erstes bzw. letztes Element
+        \item \texttt{take, drop}: Die ersten \textit{n} Elemente bzw. die Liste ohne die ersten \textit{n} Elemente, 1. Argument: \textit{n}, 2. Argument: die Liste
+        \item \texttt{length}: Länge der Liste
+        \item \texttt{reverse}: Dreht die Liste
+        \item \texttt{elem}: Testet ob \textit{x} in der Liste enthalten, 1. Argument: \textit{x}, 2. Argument: Liste
+    \end{itemize}
 \end{frame}
 
 \begin{frame}{Funktionstypen}
