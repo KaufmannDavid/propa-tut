@@ -18,6 +18,12 @@
 \begin{frame}{Verwirrung vom letzten Mal}
     Wir waren uns nicht sicher was wie stark bindet
     \code{../demos/Length.hs}
+    
+    \texttt{lengthAcc [1,2] 0}
+    
+    \texttt{=> (lengthAcc [2] 0) + 1}
+
+    \texttt{=> ((lengthAcc [] 0) + 1) + 1}
 \end{frame}
 
 \begin{frame}{Notenskala}
@@ -49,7 +55,7 @@
     $\leadsto$ Elemente mit dem gleichen Key müssen ihre Reihenfolge beibehalten
 \end{frame}
 
-\section{Kombinatoren}
+\section{Vorlesungswiederholung}
 
 \begin{frame}{Listenkombinatoren}
   \begin{itemize}
@@ -99,36 +105,6 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Cheatsheet: Tupel und Konzepte}
-  \begin{itemize}
-    \item \emph{List comprehension}, \emph{Laziness}
-    \item \texttt{[f x | x <- xs, p x]} $\equiv$ \texttt{map f (filter p xs)}\\
-      Bspw.: \texttt{[x * x | x <- [1..]]} $\Rightarrow$ \texttt{[1,4,9,16,25,...]}
-    \item \emph{Tupel}
-    \item \texttt{(,) :: a -> b -> (a, b)} (\enquote{Tupel-Konstruktor})
-    \item \texttt{fst :: (a, b) -> a}
-    \item \texttt{snd :: (a, b) -> b}
-  \end{itemize}
-\end{frame}
-
-\begin{frame}{Cheatsheet: Typen}
-  \begin{itemize}
-    \item \texttt{Char}, \texttt{Int}, \texttt{Integer}, ...
-    \item \texttt{String}
-    \item \emph{Typvariablen} \texttt{a}, \texttt{b}/\emph{Polymorphe Typen}:
-    \begin{itemize}
-      \item \texttt{(a, b)}: Tupel
-      \item \texttt{[a]}: Listen
-      \item \texttt{a -> b}: Funktionen
-      \item Vgl. Java: \texttt{List<A>}, \texttt{Function<A, B>}
-    \end{itemize}
-    \item \emph{Typsynonyme}: \texttt{type String = [Char]}
-  \end{itemize}
-\end{frame}
-
-
-\section{Lazy Evaluation}
-
 \begin{frame}{Lazy Evaluation}
 	\code{code/ghci-lazy.output}
 
@@ -156,44 +132,47 @@
 	\end{itemize}
 \end{frame}
 
-\section{Hangman}
-
-\begin{frame}{Hangman}
-        Schreibt folgende Funktionen:
-	\begin{itemize}
-		\item \texttt{showHangman} --- Zeigt aktuellen Spielstand als \texttt{String}
-		\begin{itemize}
-			\item Definition: \texttt{showHangman word guesses = ...}
-			\item Typ: \texttt{showHangman :: String -> [Char] -> String}
-		\end{itemize}
-		\item \texttt{updateHangman} --- Bildet Usereingabe (als \texttt{String}) und alten Zustand auf neuen Zustand ab
-		\begin{itemize}
-			\item Definition: \texttt{updateHangman inputLine guesses}
-			\item Beispiel: \texttt{updateHangman "h" "aske" == "haske"}
-		\end{itemize}
-	\end{itemize}
+\begin{frame}{Lazy Evaluation}
+    \begin{itemize}
+        \item Arithmetische Operatoren \texttt{((+), (-), (*))} werten Argumente \textbf{immer} aus
+        \item Vergleichsoperatoren \texttt{(<), (<=), (==)} werten Argumente \textbf{immer} aus
+        \item Boolsche Operatoren \texttt{((&&), (||))} nutzen Short-Circuit-Auswertung
+        \item Strukturelle Operatoren \texttt{((:), (,))} werten Argumente \textbf{nie} aus
+    \end{itemize}
 \end{frame}
 
-\begin{frame}{Hangman --- CLI-Framework}
-	\code{../demos/CLI.hs}
-
-	\begin{itemize}
-		\item \texttt{s} ist der Typ des Spielzustands
-		\item Anfänglicher Zustand: \texttt{[]} --- leere Liste an Rateversuchen
-                \item \texttt{showHangman :: [Char] -> String}
-		\pause
-                \item \texttt{updateHangman :: String -> [Char] -> [Char]}
-		\pause
-                \item \texttt{initHangman :: [Char]}
-	\end{itemize}
+\begin{frame}{List Comprehension}
+    Sytnax: \texttt{[e|$q_1,...,q_m$]}
+    \begin{itemize}
+        \item \texttt{e} ist ein Ausdruck
+        \item \texttt{$q_1,...,q_m$} sind Generatoren (\texttt{p <- xs}) oder Prädikate
+    \end{itemize}
+    \pause
+    Die Reihenfolge ist wichtig!
+    \begin{itemize}
+        \item \texttt{[(x,y)| x <- [1..10], y <- [1..x]]} Funktioniert
+        \item \texttt{[(x,y)| y <- [1..x], x <- [1..10]]} Kompilierfehler
+        \item \texttt{[(x,y)| x <- [1..], y <- [1..]]} Immer \texttt{(1,n)}
+    \end{itemize}
 \end{frame}
 
-\begin{frame}{Hangman --- Beispiele}
-	\begin{itemize}
-          \item \texttt{showHangman "{}test"{} "{}e"{}} $\Rightarrow$ \texttt{"{}. e . . | e"{}}
-          \item \texttt{showHangman "{}test"{} "{}sf"{}} $\Rightarrow$ \texttt{"{}. . s . | s f"{}}
-          \item \texttt{updateHangman "{}f"{} "{}abc"{}} $\Rightarrow$ \texttt{"{}fabc"{}}
-	\end{itemize}
+\begin{frame}{Aufgabe}
+    Erstelle eine Liste, die alle Tupel \texttt{(x,y)} mit $x,y \in \mathbb{N}_+$ genau einmal enthält.
+    \pause
+    
+    \texttt{[(x,y)|n <- [1..], x <- [1..n-1], y <- [n-x]]}
+\end{frame}
+
+\begin{frame}{Cheatsheet: Tupel und Konzepte}
+  \begin{itemize}
+    \item \emph{List comprehension}, \emph{Laziness}
+    \item \texttt{[f x | x <- xs, p x]} $\equiv$ \texttt{map f (filter p xs)}\\
+      Bspw.: \texttt{[x * x | x <- [1..]]} $\Rightarrow$ \texttt{[1,4,9,16,25,...]}
+    \item \emph{Tupel}
+    \item \texttt{(,) :: a -> b -> (a, b)} (\enquote{Tupel-Konstruktor})
+    \item \texttt{fst :: (a, b) -> a}
+    \item \texttt{snd :: (a, b) -> b}
+  \end{itemize}
 \end{frame}
 
 \end{document}
