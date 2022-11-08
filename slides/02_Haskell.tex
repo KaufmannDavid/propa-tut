@@ -3,11 +3,11 @@
 
 \input{common.tex}
 
-\title{Tutorium 02: Mehr Haskell}
+\title{Tutorium 02: Kombinatoren, Lazyness}
 % \subtitle{}
-\author{Paul Brinkmeier}
+\author{David Kaufmann}
 \institute{Tutorium Programmierparadigmen am KIT}
-\date{02. November 2021}
+\date{09. November 2022}
 
 \begin{document}
 
@@ -23,15 +23,6 @@
 		\item Grundansatz falsch
 		\item Richtig!
 		\item Richtiger Ansatz, aber unvollständig
-	\end{itemize}
-\end{frame}
-
-\section{Heutiges Programm}
-\begin{frame}{Programm}
-	\begin{itemize}
-		\item Übungsblatt 1/Aufgabe 1
-		\item Wiederholung der Vorlesung
-		\item Aufgaben zu Haskell
 	\end{itemize}
 \end{frame}
 
@@ -53,26 +44,40 @@
 	\code{../demos/Arithmetik4.hs}
 \end{frame}
 
-\begin{frame}{Aufgaben 2 und 3}
-  Teilaufgaben 2 und 3 sind noch nicht korrigiert.
+\begin{frame}{2.1, 2.2 --- InsertSort}
+  \code{../demos/InsertSort.hs}
+\end{frame}
 
-  $\leadsto$ nächste Woche
+\begin{frame}{2.3, 2.4 -- MergeSort}
+    \code{../demos/MergeSort.hs}    
 \end{frame}
 
 \section{Wiederholung: Funktionen}
 
-\begin{frame}{Cheatsheet: Listenkombinatoren}
+\begin{frame}{Listenkombinatoren}
   \begin{itemize}
     \item \texttt{foldr :: (a -> b -> b) -> b -> [a] -> b}
+        \begin{itemize}
+            \item Bsp.: \texttt{foldr f s [1,2,3]} berechnet \texttt{(f 1 (f 2 (f 3 s)))}
+        \end{itemize}
     \item \texttt{foldl :: (b -> a -> b) -> b -> [a] -> b}
-    \item \texttt{map :: (a -> b) -> [a] -> [b]}
-    \item \texttt{filter :: (a -> Bool) -> [a] -> [a]}
-    \item \texttt{zipWith :: (a -> b -> c) -> [a] -> [b] -> [c]}
-    \item \texttt{zip :: [a] -> [b] -> [(a, b)]}
-    \item \texttt{and, or :: [Bool] -> Bool}
+        \begin{itemize} 
+            \item Bsp.: \texttt{foldl f s [1,2,3]} berechnet \texttt{(f (f (f s 1) 2) 3)}
+        \end{itemize}
+    \item Für beide gilt: \texttt{foldr operation initial list}
   \end{itemize}
+\end{frame}
 
-  Idee: Statt Rekursion selbst zu formulieren verwenden wir fertige \enquote{Bausteine}, sogenannte \enquote{Kombinatoren}.
+\begin{frame}{Listenkombinatoren}
+    Weitere Kombinatoren:
+    \begin{itemize}
+        \item \texttt{map :: (a -> b) -> [a] -> [b]}
+        \item \texttt{filter :: (a -> Bool) -> [a] -> [a]}
+        \item \texttt{zipWith :: (a -> b -> c) -> [a] -> [b] -> [c]}
+        \item \texttt{zip :: [a] -> [b] -> [(a, b)]}
+        \item \texttt{and, or :: [Bool] -> Bool}
+    \end{itemize}
+    Idee: Statt Rekursion selbst zu formulieren verwenden wir fertige \enquote{Bausteine}, sogenannte \enquote{Kombinatoren}.
 \end{frame}
 
 \begin{frame}{Cheatsheet: Tupel und Konzepte}
