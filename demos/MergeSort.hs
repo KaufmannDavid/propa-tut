@@ -1,9 +1,10 @@
 module MergeSort where
 
+merge left [] = left
+merge [] right = right
 merge left@(x:xs) right@(y:ys)
   | x <= y    = x : merge xs   right
   | otherwise = y : merge left ys
-merge left right = left ++ right
 
 mergeSort []   = []
 mergeSort [x]  = [x]
