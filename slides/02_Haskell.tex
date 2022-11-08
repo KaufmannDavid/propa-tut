@@ -15,6 +15,11 @@
 	\titlepage
 \end{frame}
 
+\begin{frame}{Verwirrung vom letzten Mal}
+    Wir waren uns nicht sicher was wie stark bindet
+    \code{../demos/Length.hs}
+\end{frame}
+
 \begin{frame}{Notenskala}
 	\begin{itemize}
 		\item -
@@ -28,31 +33,23 @@
 
 \section{Übungsblatt 1}
 
-\begin{frame}{1.1, 1.2 --- \texttt{pow1} und \texttt{pow2}}
-	\code{../demos/Arithmetik1.hs}
+\begin{frame}{Stabile Sortieralgorithmen}
+    Wir sortieren diese Liste anhand dem ersten Element der Tupel
+    \begin{itemize}
+        \item \texttt{[(1,1),(4,2),(2,1),(5,1),(4,1)]}
+    \end{itemize}
+    Das ist stabil
+    \begin{itemize}
+        \item \texttt{[(1,1),(2,1),(4,2),(4,1),(5,1)]}
+    \end{itemize}
+    Das nicht 
+    \begin{itemize}
+        \item \texttt{[(1,1),(2,1),(4,1),(4,2),(5,1)]}
+    \end{itemize}
+    $\leadsto$ Elemente mit dem gleichen Key müssen ihre Reihenfolge beibehalten
 \end{frame}
 
-\begin{frame}{1.3 --- \texttt{pow3}}
-	\code{../demos/Arithmetik2.hs}
-\end{frame}
-
-\begin{frame}{1.4 --- \texttt{root}}
-	\code{../demos/Arithmetik3.hs}
-\end{frame}
-
-\begin{frame}{1.5 --- \texttt{isPrime}}
-	\code{../demos/Arithmetik4.hs}
-\end{frame}
-
-\begin{frame}{2.1, 2.2 --- InsertSort}
-  \code{../demos/InsertSort.hs}
-\end{frame}
-
-\begin{frame}{2.3, 2.4 -- MergeSort}
-    \code{../demos/MergeSort.hs}    
-\end{frame}
-
-\section{Wiederholung: Funktionen}
+\section{Kombinatoren}
 
 \begin{frame}{Listenkombinatoren}
   \begin{itemize}
@@ -78,6 +75,28 @@
         \item \texttt{and, or :: [Bool] -> Bool}
     \end{itemize}
     Idee: Statt Rekursion selbst zu formulieren verwenden wir fertige \enquote{Bausteine}, sogenannte \enquote{Kombinatoren}.
+\end{frame}
+
+\begin{frame}{Aufgaben}
+	Schreibt ein Modul \texttt{Tut02} mit:
+
+	\begin{itemize}
+		\item \texttt{import Prelude hiding (foldl, foldr, map, filter, scanl, zip, zipWith)}
+		\item \texttt{map} --- Einmal von Hand, einmal per Fold
+		\item \texttt{filter} --- Einmal von Hand, einmal per Fold
+		\item \texttt{squares l} --- Liste der Quadrate der Elemente von \texttt{l}
+		\item \texttt{zip as bs} --- Erstellt Tupel der Elemente von \texttt{as} und \texttt{bs}
+		\item \texttt{zipWith as bs} --- Wendet komponentenweise \texttt{f} auf die Elemente von \texttt{as} und \texttt{bs} an
+		\begin{itemize}
+			\item Bspw. \texttt{zipWith (+) [1, 1, 2, 3] [1, 2, 3, 5] == [2, 3, 5, 8]}
+		\end{itemize}
+   		\pause
+		\item \texttt{foldl}
+		\item \texttt{scanl f i l} --- Wie \texttt{foldl}, gibt aber eine Liste aller Akkumulatorwerte zurück
+		\begin{itemize}
+			\item Bspw. \texttt{scanl (*) 1 [1, 3, 5] == [1, 3, 15]}
+		\end{itemize}
+	\end{itemize}
 \end{frame}
 
 \begin{frame}{Cheatsheet: Tupel und Konzepte}
@@ -107,27 +126,6 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Aufgaben}
-	Schreibt ein Modul \texttt{Tut02} mit:
-
-	\begin{itemize}
-		\item \texttt{import Prelude hiding (foldl, foldr, map, filter, scanl, zip, zipWith)}
-		\item \texttt{map} --- Einmal von Hand, einmal per Fold
-		\item \texttt{filter} --- Einmal von Hand, einmal per Fold
-		\item \texttt{squares l} --- Liste der Quadrate der Elemente von \texttt{l}
-		\item \texttt{zip as bs} --- Erstellt Tupel der Elemente von \texttt{as} und \texttt{bs}
-		\item \texttt{zipWith as bs} --- Wendet komponentenweise \texttt{f} auf die Elemente von \texttt{as} und \texttt{bs} an
-		\begin{itemize}
-			\item Bspw. \texttt{zipWith (+) [1, 1, 2, 3] [1, 2, 3, 5] == [2, 3, 5, 8]}
-		\end{itemize}
-   		\pause
-		\item \texttt{foldl}
-		\item \texttt{scanl f i l} --- Wie \texttt{foldl}, gibt aber eine Liste aller Akkumulatorwerte zurück
-		\begin{itemize}
-			\item Bspw. \texttt{scanl (*) 1 [1, 3, 5] == [1, 3, 15]}
-		\end{itemize}
-	\end{itemize}
-\end{frame}
 
 \section{Lazy Evaluation}
 
