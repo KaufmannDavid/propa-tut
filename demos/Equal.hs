@@ -1,4 +1,4 @@
 module Equal where
   class Eq t where 
-    (==):: t -> Bool
-    (/=):: t -> Bool
+    (==):: t -> t -> Bool
+    (/=):: t -> t -> Bool
