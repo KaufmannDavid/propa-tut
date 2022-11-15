@@ -8,4 +8,4 @@ eval polynom x = foldr go 0 polynom
   where go a_n acc = acc * x + a_n
 
 deriv [] = []
-deriv polynom = zipWith (*) [1..] $ tail polynom
+deriv polynom = zipWith (*) [1..] (tail polynom)
