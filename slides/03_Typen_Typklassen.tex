@@ -5,14 +5,28 @@
 
 \title{Tutorium 03: Typen und Typklassen}
 % \subtitle{}
-\author{Paul Brinkmeier}
+\author{David Kaufmann}
 \institute{Tutorium Programmierparadigmen am KIT}
-\date{09. November 2020}
+\date{16. November 2022}
 
 \begin{document}
 
 \begin{frame}
 	\titlepage
+\end{frame}
+
+\begin{frame}{Letztes Mal...}
+    \texttt{foldl f z [] = z}
+    
+    \texttt{foldl f z (x:xs) = f (foldl f z xs) x}
+
+    \bigskip
+
+    \texttt{foldl f z (x:xs) = foldl f (op x z) xs}
+
+    \bigskip
+
+    \texttt{foldr f z (x:xs) = f x (foldr f z xs)}
 \end{frame}
 
 \section{Übungsblatt 2}
@@ -31,8 +45,20 @@
 
 \begin{frame}{2.2.\{1,2,3\} -- Polynome}
   \code{../demos/Polynom.hs}
+\end{frame}
 
-  \texttt{(\$) :: (a -> b) -> a -> b} -- Funktionsanwendung als Operator.
+\begin{frame}{Zu eval}
+    \texttt{foldr op i [] = i}
+
+    \texttt{foldr op i (x:xs) = op x (foldr op i xs)}
+
+    \bigskip
+    
+    Beispiel Polynom \texttt{[1,2,3,4]}
+
+    \texttt{1 + x(2+x(3+x(4+x*0)))}
+
+    
 \end{frame}
 
 \section{Wiederholung:\\Typen und Typklassen}
@@ -149,6 +175,32 @@
 
 \section{Übung}
 
+\begin{frame}{Führerschein}
+  \begin{itemize}
+    \item Liste von Klassen, Name, Geburtsdatum (als Tupel)
+    \item es gibt Klassen \texttt{A, B, BE, C, D}
+    \item Klasse B kann Zusatzziffer B96 haben (über boolean angegeben).
+    \item Beispiel:\\
+          \texttt{DriversLicense [A, B True] "{}Arthur"{} (1, 1, 1970)}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Führerschein}
+    \code{../demos/DriversLicense.hs}
+\end{frame}
+
+\begin{frame}{Spielkarten}
+    \begin{itemize}
+        \item Typ Playingcard hat Suit und Rank
+        \item Suit kann \texttt{Hearts, Diamonds, Clubs, Spades} sein
+        \item Rank kann \texttt{Rank7, Rank8, Rank9, Rank10, Jack, Queen, King, Ace} sein
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Spielkarten}
+    \code{../demos/PlayingCard.hs}
+\end{frame}
+
 \begin{frame}{Queues}
   Warteschlangen lassen sich in Haskell, nicht effizient als Liste implementieren, weil die enqueue Operation immer die gesamte Liste durchlaufen muss. Folgende Definition schafft abhilfe
   
@@ -169,84 +221,19 @@
 
 \begin{frame}{Queues}
     Instanziieren sie die Typklasse \texttt{Eq} für den Datentyp \texttt{Queue}
-    \code{../demos/Equal.hs}
     \textbf{Hinweis:} sie müssen nur die Funktion \texttt{(==)} implementieren
 \end{frame}
 
 \begin{frame}{Queues}
     Implementieren sie eine Funktion \texttt{bfs::Tree a -> a}, die einen Binärbaum in dem bekannten Datentyp aus der VL entgegennimmt. Dabei gibt \texttt{bfs} die Knotenlabels des übergebenen Baums in Breitenordung zurück
-    
-\end{frame}
 
-\begin{frame}{Führerschein}
-  \code{../demos/DriversLicense.hs}
+    \texttt{data Tree t = Leaf | Node (Tree t) t (Tree t)}
 
-  \vfill
+    Beispiel: \texttt{Node Leaf 1 (Node (Node Leaf 2 Leaf) 3 Leaf)}
 
-  \begin{itemize}
-    \item Klasse B kann Zusatzziffer B96 haben.
-    \item Für Daten gibt es natürlich auch eigene Typen.
-    \item Beispiel:\\
-          \texttt{DriversLicense [A, B True] "{}Arthur"{} (1, 1, 1970)}
-  \end{itemize}
-\end{frame}
+    \texttt{>>> [1,3,2]}
 
-\begin{frame}{Spielkarten}
-  \code{../demos/PlayingCard.hs}
-\end{frame}
-
-\begin{frame}{Monopolykarten}
-  \code{../demos/Monopoly.hs}
-\end{frame}
-
-\begin{frame}{Boolesche Logik}
-  \code{../demos/BoolExpr.hs}
-
-  \vfill
-
-  Beispiele:
-  \begin{itemize}
-    \item $a \wedge b$ entspricht \texttt{BinaryOp (Var "{}a"{}) AND (Var "{}b"{})}
-    \item $a \vee (b \wedge 0)$ entspricht\\
-          \texttt{BinaryOp (Var "{}a"{}) AND (BinaryOp (Var "{}b"{}) OR (Const False))}
-  \end{itemize}
-\end{frame}
-
-\begin{frame}{MiMa}
-  \code{../demos/MiMa.hs}
-\end{frame}
-
-\section{Typklassen implementieren}
-
-\begin{frame}{Implementierung von Typklassen}
-  Implementiert:
-
-  \vfill
-
-  \begin{itemize}
-    \item Monopolykarten: \texttt{Eq MonopolyCard}, \texttt{Show MonopolyCard}
-    \item Boolesche Ausdrücke: \texttt{Show BoolExpr}
-    \item Typen in Haskell: \texttt{Show Type}
-    \item MiMa-Instruktionen: \texttt{Show MiMaInst}
-    \item Spielkarten: \texttt{Eq} und \texttt{Ord} für \texttt{Suit}, \texttt{Rank} und \texttt{PlayingCard}
-    \begin{itemize}
-      \item \texttt{Ord PlayingCard}: Zuerst nach Farbe, dann nach Wert.
-    \end{itemize}
-  \end{itemize}
-
-  \vfill
-  
-  Aufgabe: Spielkarten + eine weitere
-\end{frame}
-
-\begin{frame}{\texttt{Ord PlayingCard} -- Vorlage}
-  \code{../demos/PlayingCard2.hs}
-\end{frame}
-
-\begin{frame}{\texttt{Ord PlayingCard} -- Automatische Instanz durch \texttt{deriving}}
-  \code{../demos/PlayingCard3.hs}
-
-  \texttt{Enum} ermöglicht es, bspw. \texttt{[Hearts .. Spades]} zu schreiben.
+    \textbf{Hinweis:} Implementieren sie eine Funktion \texttt{go::Queue (Tree t) -> [a]}, die die Queue von Knoten abarbeitet
 \end{frame}
 
 \end{document}
