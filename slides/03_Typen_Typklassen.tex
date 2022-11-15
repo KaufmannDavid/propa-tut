@@ -15,25 +15,6 @@
 	\titlepage
 \end{frame}
 
-\section{Heutiges Programm}
-\begin{frame}{Programm}
-	\begin{itemize}
-        \item Übungsblätter 1 und 2
-		\item Wiederholung der Vorlesung: Typen und Typklassen
-		\item Datentypen selbst definieren
-	\end{itemize}
-\end{frame}
-
-\section{Übungsblatt 1}
-
-\begin{frame}{1.2.\{1,2\} -- Insertionsort}
-  \code{../demos/InsertSort.hs}
-\end{frame}
-
-\begin{frame}{1.2.\{3,4\} -- Mergesort}
-  \code{../demos/MergeSort.hs}
-\end{frame}
-
 \section{Übungsblatt 2}
 
 \begin{frame}{2.1 -- Bindung und Gültigkeitsbereiche}
@@ -141,17 +122,6 @@
     Jeder Konstruktur $c_i$ hat einen Namen und ggf. Parameter.
 \end{frame}
 
-\begin{frame}{\texttt{data}: Beispiel Bruchzahlen}
-    \code{../demos/Fraction.hs}
-
-    \begin{itemize}
-        \item Bruch ist ein Tupel von Ganzzahlen
-        \item Definition von \texttt{Fraction} gibt uns Typsicherheit:\\
-              Ein Bruch bleibt ein Bruch
-        \item Konvention: Hat ein Typ nur einen Konstruktor, benennen wir diesen nach dem Typen.
-    \end{itemize}
-\end{frame}
-
 \begin{frame}{\texttt{data}: Beispiel komplexe Zahlen}
     \code{../demos/Complex.hs}
 
@@ -162,25 +132,43 @@
     \end{itemize}
 \end{frame}
 
-\section{Typen selbst definieren}
+\begin{frame}{\texttt{data}: Beispiel Bruchzahlen}
+    \begin{itemize}
+        \item Bruch ist ein Tupel von Integern
+        \item Wie würde die Multiplikation aussehen
+    \end{itemize}
+    \pause
+    \code{../demos/Fraction.hs}
 
-\begin{frame}{Typen selbst definieren}
-  Modelliert mit \texttt{data}:
+    \begin{itemize}
+        \item Definition von \texttt{Fraction} gibt uns Typsicherheit:\\
+              Ein Bruch bleibt ein Bruch
+        \item Konvention: Hat ein Typ nur einen Konstruktor, benennen wir diesen nach dem Typen.
+    \end{itemize}
+\end{frame}
 
-  \vfill
+\section{Übung}
 
-  \begin{itemize}
-    \item Führerschein
-    \item Spielkarten
-    \item Monopolykarten
-    \item Boolesche Ausdrücke
-    \item MiMa-Instruktionen
-    \item (Typen in Haskell)
-  \end{itemize}
+\begin{frame}{Queues}
+  Warteschlangen lassen sich in Haskell, nicht effizient als Liste implementieren, weil die enqueue Operation immer die gesamte Liste durchlaufen muss. Folgende Definition schafft abhilfe
+  
+  \texttt{data Queue a = Q [a] [a]}
 
-  \vfill
+  \texttt{Q front back} stellt die Queue dar, die durch Konkatenation von \texttt{front} und der Umkehrung von \texttt{back} entsteht
 
-  Vorlagen: \href{https://codi.pbrinkmeier.de/s/wq88qbGYy}{codi.pbrinkmeier.de/s/wq88qbGYy}
+  Implementieren sie \texttt{fromList::[a] -> Queue a} und \texttt{toList::Queue a -> [a]}
+\end{frame}
+
+\begin{frame}{Queues}
+    Implementieren sie folgende Funktionen:
+    \begin{itemize}
+        \item \texttt{enqueue::a -> Queue a} mit konstanter Anzahl Speicherzugriffe
+        \item \texttt{dequeue::Queue a -> Maybe (a, Queue a)}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Queues}
+    Instanziieren sie die Typklasse \texttt{Eq} für den Datentyp \texttt{Queue}
 \end{frame}
 
 \begin{frame}{Führerschein}
