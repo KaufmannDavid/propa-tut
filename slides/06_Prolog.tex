@@ -1,12 +1,12 @@
-\documentclass{beamer}
+ \documentclass{beamer}
 
 \input{common.tex}
 
 \title{Tutorium 06: Prolog}
 % \subtitle{}
-\author{Paul Brinkmeier}
+\author{David Kaufmann}
 \institute{Tutorium Programmierparadigmen am KIT}
-\date{30. November 2021}
+\date{7. Dezember 2022}
 
 \begin{document}
 
@@ -14,40 +14,7 @@
 	\titlepage
 \end{frame}
 
-\section{Wiederholung}
-
-\begin{frame}{Cheatsheet: Lambda-Kalkül/Basics}
-  \begin{itemize}
-    \item Terme $t$: Variable ($x$), Funktion ($\lambda x . t$), Anwendung ($t \; t$)
-    \item \emph{$\alpha$-Äquivalenz}: Gleiche Struktur
-    \item \emph{$\eta$-Äquivalenz}: Unterversorgung
-    \item \emph{Freie Variablen}, \emph{Substitution}, \emph{RedEx}
-    \item \emph{$\beta$-Reduktion}: \\
-          $(\lambda{}p.b)$ $t \Rightarrow b\left[p\rightarrow{}t\right]$
-  \end{itemize}
-\end{frame}
-
-
-\begin{frame}{Cheatsheet: Lambda-Kalkül/Fortgeschritten}
-  \begin{itemize}
-    \item Auswertungsstrategien (von lässig nach streng):
-    \begin{itemize}
-      \item \emph{Volle $\beta$-Reduktion}
-      \item \emph{Normalreihenfolge}
-      \item \emph{Call-by-Name}
-      \item \emph{Call-by-Value}
-    \end{itemize}
-    \item Datenstrukturen:
-    \begin{itemize}
-      \item \emph{Church-Booleans}
-      \item \emph{Church-Zahlen}
-      \item \emph{Church-Listen}
-    \end{itemize}
-    \item Rekursion durch \emph{Y-Kombinator}
-  \end{itemize}
-\end{frame}
-
-\section{Übungsblatt 4}
+\section{Übungsblatt 5}
 
 \section{Y-Kombinator}
 
@@ -105,11 +72,8 @@
 		\item Funktor $\approx$ Name + Liste von Prolog-Ausdrücken
 		\item Liste leer $\leadsto$ \enquote{Atom}
 		\item Name wird immer klein geschrieben
-		\begin{itemize}
-			\item Großbuchstaben: bspw. \texttt{'List'}
-		\end{itemize}
-                \item Auch mathematische Ausdrücke sind Funktoren:\\
-                      \texttt{17 + 25} $\approx$ \texttt{'+'(17, 25)}
+            \item Auch mathematische Ausdrücke sind Funktoren:\\
+                    \texttt{17 + 25} $\approx$ \texttt{'+'(17, 25)}
 	\end{itemize}
 \end{frame}
 
