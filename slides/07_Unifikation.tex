@@ -4,9 +4,9 @@
 
 \title{Tutorium 07: Unifikation}
 % \subtitle{}
-\author{Paul Brinkmeier}
+\author{David Kaufmann}
 \institute{Tutorium Programmierparadigmen am KIT}
-\date{07. Dezember 2021}
+\date{14. Dezember 2022}
 
 \begin{document}
 
@@ -149,7 +149,7 @@
 
     \begin{itemize}
       \item Auch wenn rechts eine Variable steht muss sie ersetzt werden.
-      \item Beispiel: $\theta_r = Y$ \true, $X \not\in FV(\theta_l) = FV(\functor{f}{Z}) = \{ Z \}$ \true, d.h.\\
+      \item Beispiel: $\theta_r = Y$ \true, $Y \not\in FV(\theta_l) = FV(\functor{f}{Z}) = \{ Z \}$ \true, d.h.\\
         Ergebnis: $\texttt{unify}(\{ \functor{f}{Z} \plsunify \functor{f}{\pa{a}} \}) \circ \unifier{\su{Y}{f(Z)}}$
     \end{itemize}
   }
@@ -171,6 +171,15 @@
           Ergebnis: $\texttt{unify}(\emptyset \cup \{ Z \plsunify \pa{a} \}) = \unifier{\su{Z}{\pa{a}}}$ (links Variable)
     \end{itemize}
   }
+\end{frame}
+
+\begin{frame}{Klausuraufgabe SS21 (8 P.)}
+    Gegeben sei die einelementige Menge von Gleichungen
+    $$C = \{ \functor{f}{X_1,X_1} = \functor{f}{\functor{f}{X_2,X_3},\functor{f}{X_4, \functor{g}{X_4}}}\} $$
+
+    Führen Sie den Unifikationsalgorithmus nach Robinson durch. Geben Sie bei jedem rekursiven Aufruf die erzeugte Substitution sowie die noch zu unifizierende Menge an.
+    
+    Geben Sie das Endergebnis in Listenform an.
 \end{frame}
 
 \section{Typinferenz}
@@ -487,169 +496,13 @@
 	\end{itemize}
 \end{frame}
 
-\section{Prolog}
-
-\subsection{Cheatsheet}
-
-\begin{frame}{Cheatsheet: Prolog}
-  \begin{itemize}
-    \item Terme:
+\begin{frame}{Nächste Woche (21. Dezember 2022)}
     \begin{itemize}
-      \item Variablen: \texttt{Var}, \texttt{X}, \texttt{X2}
-      \item Funktoren/Atome: \texttt{f(a, b, c)}, \texttt{app(f, x)}, \texttt{main}
-      \item Arithmetische Ausdrücke: \texttt{17 + 25}, \texttt{6 * 7}
-    \end{itemize}
-    \item Regeln: \texttt{rule(P1, ..., PN) :- Goal1, ..., GoalM.}
-    \item Ziele:
-    \begin{itemize}
-      \item Funktor: \texttt{member(X, [1,2,3])}
-      \item Unifikation: \texttt{X = Y}
-      \item Arithmetik: \texttt{N is M + 1}
-      \item Verneinung: \texttt{not(G)}
-      \item Arithmetischer Vergleich: \texttt{X =:= Y}, \texttt{X =\textbackslash= Y}, etc.
-      \item Cut: \texttt{!}
-    \end{itemize}
-    \item Konzepte: \emph{Unifikation}, \emph{Resolution}
-  \end{itemize}
-\end{frame}
-
-\begin{frame}{Prolog --- Regelsysteme als Programmiersprache}
-  \code{../demos/grandparents.pl}
-
-  \vfill
-
-  \only<1>{
-    \texttt{?- grandparent(inge, kunibert).} $\leadsto$ \texttt{yes.}
-  }
-
-  \only<2>{
-    \begin{mathpar}
-      \inferrule{
-        \inferrule{
-          \inferrule{ }{\text{\texttt{mother(inge, emil)}}}
-        }{
-          \text{\texttt{parent(inge, emil)}}
-        } \\
-        \inferrule{
-          \inferrule{ }{\text{\texttt{father(emil, kunibert)}}}
-        }{
-          \text{\texttt{parent(emil, kunibert)}}
-        }
-      }{
-        \text{\texttt{grandparent(inge, kunibert)}}
-      }
-    \end{mathpar}
-  }
-\end{frame}
-
-\subsection{Bettenverteilung}
-
-\begin{frame}{Schlafplätze im Gefängnis}
-	\begin{figure}
-		\includegraphics[width=0.8\textwidth]{images/bett}
-	\end{figure}
-\end{frame}
-
-\begin{frame}{Dinesman's multiple-dwelling problem}
-	Bob kommt nun ins Gefängnis.
-	Aaron, Bob, Connor, David und Edison müssen sich zu fünft ein sehr breites Bett teilen.
-
-	\begin{itemize}
-		\item Aaron will nicht am rechten Ende liegen
-		\item Bob will nicht am linken Ende liegen
-		\item Connor will an keinem der beiden Enden liegen
-		\item David will weiter rechts liegen als Bob
-		\item Connor schnarcht sehr laut;\\Bob und Edison sind sehr geräuschempfindlich
-		\begin{itemize}
-			\item $\leadsto$ Bob will nicht direkt neben Connor liegen
-			\item $\leadsto$ Edison will nicht direkt neben Connor liegen
-		\end{itemize}
-	\end{itemize}
-
-	Wie können die 5 Schlafplätze verteilt werden?
-\end{frame}
-
-\begin{frame}{Schlafplätze im Gefängnis}
-	\code{../demos/schlafplaetze.pl}
-
-	\begin{itemize}
-		\item Fügt weitere benötigte Tests ein
-		\item Implementiert:
-		\begin{itemize}
-			\item \texttt{distinct/1} prüft Listenelemente auf paarweise Ungleichheit
-			\item \texttt{adjacent/2} prüft, ob $|A - B| = 1$
-		\end{itemize}
-	\end{itemize}
-\end{frame}
-
-% ansatz: multipleDwelling(B, C, F, M, S) :- ....
-% distinct/1
-% adjacent/2
-
-\subsection{Putzdienst}
-
-\begin{frame}{Putzdienst}
-	\begin{figure}
-		\includegraphics[width=0.7\textwidth]{images/putzdienst}
-	\end{figure}
-\end{frame}
-
-\begin{frame}{Putzdienst}
-	\begin{itemize}
-		\item Aaron, Bob, Connor, David und Edison sollen 4 Einheiten Putzdienst übernehmen
-		\item Da sie sich nicht einigen können, wer aussetzen darf, wendet ein Wärter folgendes Vorgehen an:
-		\begin{itemize}
-			\item Die fünf werden im Kreis aufgestellt
-			\item Der Wärter stellt sich in die Mitte
-			\item Beginnend bei 12 Uhr dreht er sich im Uhrzeigersinn und teilt jeden $k$-ten (bspw. $k = 2$) Insassen zum Putzdienst ein
-			\begin{itemize}
-				\item D.h. es werden immer $k - 1$ Insassen übersprungen
-			\end{itemize}
-		\end{itemize}
-	\end{itemize}
-
-	An welcher Stelle muss Bob stehen, um nicht putzen zu müssen?\\
-	\pause
-	An welcher Stelle muss Bob bei 41 Insassen und $k = 3$ stehen?
-\end{frame}
-
-\begin{frame}{Putzdienst}
-	\code{../demos/putzdienst.pl}
-
-	\begin{itemize}
-		\item Weitere Fälle für \texttt{helper/4}:
-		\begin{itemize}
-			\item \texttt{C = 0} $\leadsto$ Element entfernen
-			\item Ansonsten: Element hinten wieder anhängen
-		\end{itemize}
-	\end{itemize}
-\end{frame}
-
-\subsection{Quellen}
-
-\begin{frame}{Quellen der Aufgaben}
-	Zum Nachlesen und Vergleichen mit Lösungen in anderen Programmiersprachen:
-	\begin{itemize}
-		\item WG --- \href{https://rosettacode.org/wiki/Department_Numbers}{Rosetta Code: Department Numbers}
-		\item Detektiv --- \href{https://github.com/Anniepoo/prolog-examples/blob/master/newdetective.pl}{github.com/Anniepoo/prolog-examples}
-		\item Schlafplätze --- SICP, S. 418
-		\item Putzdienst --- \href{https://rosettacode.org/wiki/Josephus_problem}{Rosetta Code: Josephus problem}
-	\end{itemize}
-\end{frame}
-
-% quellen:
-% multiple dwelling: SICP S. 418
-% detective: https://github.com/Anniepoo/prolog-examples/blob/master/newdetective.pl
-% department numbers: https://rosettacode.org/wiki/Department_Numbers
-% josephus problem: https://rosettacode.org/wiki/Josephus_problem#Python
-
-\begin{frame}{Nächste Woche (14. Dezember 2021)}
-    \begin{itemize}
-        \item Blätter 5-7
         \item Mehr...
         \begin{itemize}
             \item ...Prolog?
-            \item ...Typisierung?
+            \item ...Unifikation?
+            \item ...Typherleitung?
             \item ...Haskell?
         \end{itemize}
     \end{itemize}
