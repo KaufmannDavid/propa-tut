@@ -47,7 +47,7 @@
 % \subtitle{}
 \author{Paul Brinkmeier}
 \institute{Tutorium Programmierparadigmen am KIT}
-\date{25. Januar 2022}
+\date{25. Januar 2023}
 
 \begin{document}
 
@@ -237,7 +237,7 @@
 
   \only<3>{
     \begin{align*}
-      P &= \frac{7s}{7s + 3s} = 0,7 \\
+      p &= \frac{7s}{7s + 3s} = 0,7 \\
       T(n) &= 0.3 + \frac{0,7}{n} \\
       S(4) &= \frac{1}{0,3 + 0,175} \approx 2,1
     \end{align*}
@@ -260,7 +260,7 @@
   \code{code/function.java}
 
   \begin{itemize}
-    \item \text{java.util.function} enthält alle möglichen solchen Interfaces (ziemlicher Clusterfuck)
+    \item \text{java.util.function} enthält alle möglichen solchen Interfaces
     \item Eigene Typen für Lambdas?
   \end{itemize}
 \end{frame}
@@ -357,18 +357,10 @@
   }
 \end{frame}
 
-\section{Ende}
+\section{Fork-Join}
 
-\begin{frame}{Ende}
-  % TODO
-	\begin{itemize}
-		\item Im Campus-System könnt ihr euch bis zum 22.03. für die PP-Klausur anmelden
-                \begin{itemize}
-                  \item Termin: 08.04.2022 von 12:00 bis 14:00
-                \end{itemize}
-		\item Bis zum 15.02. könnt ihr euch \href{https://campus.studium.kit.edu/renewal/payment.php}{Rückmelden}
-		\item Schöne Woche!
-	\end{itemize}
+\begin{frame}{Fork-Join}
+    Probleme werden gelöst indem sie in Teilprobleme aufgeteilt werden und dann diese gelöst werden.
 \end{frame}
 
 \end{document}
