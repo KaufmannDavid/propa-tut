@@ -45,7 +45,7 @@
 
 \title{Tutorium 11: Parallelität in Java}
 % \subtitle{}
-\author{Paul Brinkmeier}
+\author{David Kaufmann}
 \institute{Tutorium Programmierparadigmen am KIT}
 \date{25. Januar 2023}
 
@@ -58,20 +58,6 @@
 \section{Heutiges Programm}
 
 \begin{frame}{Parallelprogrammierung}
-	ProPa-Stoff zu Parallelprogrammierung:
-
-	\begin{itemize}
-		\item Grundlegende Begriffe
-		\item Message Passing, wurde in OS \emph{kurz} behandelt (\enquote{message queues})
-		\item Shared Memory + Synchronisierung, wie in SWT1, OS, etc.
-		\begin{itemize}
-                  \item In Java, mit ein paar Details zur JVM \textcolor{red}{$\leftarrow$ wir sind hier}
-		\end{itemize}
-              \item Dieses Jahr: \emph{Manuelles Threading und Monitore in Java (siehe bspw. auch SWT1) sind nicht Bestandteil der VL.}
-	\end{itemize}
-\end{frame}
-
-\begin{frame}{Parallelprogrammierung}
   Heute: Verschiedene Java-/Parallelprogrammierungskonzepte
 
   \begin{itemize}
@@ -80,6 +66,7 @@
     \item Threads (\texttt{.start()}, \texttt{.run()})
     \item Futures
     \item Happens-before-Beziehung
+    \item Fork-Join
   \end{itemize}
 \end{frame}
 
@@ -360,11 +347,14 @@
 \section{Fork-Join}
 
 \begin{frame}{Fork-Join}
-    Probleme werden gelöst indem sie in Teilprobleme aufgeteilt werden und dann diese gelöst werden.
-\end{frame}
+    Probleme werden gelöst indem sie in Teilprobleme aufgeteilt werden und dann diese gelöst werden.    
+    
+    \texttt{ForkJoinPool} kann \texttt{ForkJoinTasks} ausführen
 
-\begin{frame}{Task}
-    \code{code/SumTask.java}
+    \texttt{RecursiveAction} liefert nichts zurück, \texttt{RecursiveTask} liefert ein Ergebnis zurück
+
+    Beispiel siehe \texttt{/demos/forkjoin}
+    
 \end{frame}
 
 \end{document}
