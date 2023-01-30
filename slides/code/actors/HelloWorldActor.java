@@ -1,4 +1,4 @@
-public class HelloWorldActor {
+public class HelloWorldActor extends AbstractActor{
     @Override
     public Receive createReceive() {
         return receiveBuilder()
