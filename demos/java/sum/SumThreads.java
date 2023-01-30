@@ -10,6 +10,7 @@ class SumThreads {
         // Initialize threads here. If you have N threads, each of them should run n / N ++ operations.
         Thread threads[] = new Thread[N];
         long sums[] = new long[N];
+        long sum = 0;
 
         IntStream.range(0, N).forEach((i) -> {
             long chunkSize = n / N;
@@ -24,7 +25,7 @@ class SumThreads {
             t.start();
         });
 
-        long sum = 0;
+        
         for (int i = 0; i < N; i++) {
             threads[i].join();
             sum += sums[i];
