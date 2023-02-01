@@ -16,10 +16,10 @@
 \section{Actor Model}
 \begin{frame}{Actor Model}
     \begin{itemize}
-        \item Actors are computation units with State, Behaviour, Mailbox
-        \item communicate via messages
-        \item can only process one message at a time
-        \item process messages in order they arrived
+        \item Actors sind computation units mit State, Behaviour, Mailbox
+        \item kommunizieren über Nachrichten
+        \item verarbeiten immer nur eine Nachricht
+        \item verarbeiten Nachrichten in der Reihenfolge in der sie empfangen wurden
     \end{itemize}
 \end{frame}
 
@@ -31,15 +31,40 @@
 \begin{frame}{Further Methods}
     \begin{itemize}
         \item \texttt{preStart(), postStop(), preRestart(), postRestart()}
-        \item \texttt{getSelf()}: Ref to self
-        \item \texttt{getContext()}: delivers Context to create new actors
-        \item \texttt{getSender()}: Sender of current message
+        \item \texttt{getSelf()}: Referenz auf sich selbst
+        \item \texttt{getContext()}: Context um weiter Actoren zu erzeugen
+        \item \texttt{getSender()}: Sender der aktuell verarbeiteten Nachricht
     \end{itemize}
 \end{frame}
 
 \begin{frame}{Actor Creation}
-    Use 
+    Muss auf einen \textbf{Context} aufgerufen werden, entweder \texttt{ActorSystem} oder \texttt{getContext()} von innerhalb eines Actors.
+    
+    Actor beaufsichtigt alle Aktoren die er erstellt hat
+    \footnotesize
+    \code{./code/actors/CreateActor.java} 
 \end{frame}
+
+\begin{frame}{Messages}
+    Muss auf den Empfänger aufgerufen werden
+    \begin{itemize}
+        \item \texttt{tell(Object message, ActorRef sender)}: asyncron, nicht blockierend
+        \item \texttt{Future<?> Patterns.ask(ActorRef target, Object msg, Timeout timeout)}: kann awaited werden, sollte man aber vermeiden
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Running Actors}
+    \begin{itemize}
+        \item \texttt{ActorSystem.create(String name)}: Erzeugt ein ActorSystem
+        \item \texttt{void stop(ActorRef actorToStop)}: Muss auf eine ActorRefFactory aufgerufen werden (ActorSystem, Context)
+        \item \texttt{PoisonPill.getInstance()}: Kann als Nachricht an einen Actor gesendet werden
+        \item \texttt{ActorSystem.terminater()}: Terminiert ActorSystem
+    \end{itemize}
+\end{frame}
+
+\section{Klausuraufgabe SS21}
+
+\section{JML-Klausuraufgabe}
 
 \begin{frame}{Cheatsheet: Design by Contract}
 	ProPa-Stoff zu Design by Contract:
@@ -62,7 +87,6 @@
 	\end{itemize}
 \end{frame}
 
-\section{JML-Klausuraufgabe}
 
 \begin{frame}{JML-Klausuraufgabe}
     Klausur 19SS, Aufgabe 6d (3P.)
@@ -163,39 +187,10 @@
 			\item \texttt{isEmpty()}
 			\item \texttt{add()}
 			\item \texttt{contains()}
-			\item \texttt{getElements()}
 		\end{itemize}
-	\end{itemize}
-
-        \vfill
-
-        \begin{itemize}
-          \item OpenJML bekommt ihr auf \href{https://openjml.org}{openjml.org}
-          \item Zum automatischen Prüfen der Verträge:
-        \end{itemize}
-        \footnotesize
-        \texttt{./openjml -esc Set.java}
-\end{frame}
-
-\begin{frame}{Übungsaufgabe 2 --- Gefilterte Summe (18SS A7)}
-	\code{code/filteredsum.pseudo}
-
-	\begin{itemize}
-		\item Wie lässt sich ein \enquote{Speedup} von 0.005 gegenüber einer Lösung ohne Threads erklären, wenn $|\textrm{\texttt{xs}}| \approx 10^7$ (3P.)?
-		\item Ersetzen Sie [die entsprechenden Zeilen] durch eine Implementierung mit möglichst hohem Speedup (7,5P.).
-		\item Geben Sie eine Implementierung mittels parallelen Streams an (2,5P.).
-		\item Zusätzlich: DbC-Fragen für 5P.
 	\end{itemize}
 \end{frame}
 
 \section{Ende}
-
-\begin{frame}{Ende}
-	\begin{itemize}
-		\item Nächste Woche: Letztes Tut!
-		\item Thema: Compiler
-		\item Wieder in Präsenz
-	\end{itemize}
-\end{frame}
 
 \end{document}
