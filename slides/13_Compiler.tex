@@ -1,90 +1,16 @@
 \documentclass{beamer}
 \input{common.tex}
 
-\title{Tutorium 13: Actoren \& Compiler}
+\title{Tutorium 13: Syntaktische Analyse}
 % \subtitle{}
 \author{David Kaufmann}
 \institute{Tutorium Programmierparadigmen am KIT}
-\date{7. Februar 2023}
+\date{8. Februar 2023}
 
 \begin{document}
 
 \begin{frame}
 	\titlepage
-\end{frame}
-
-\section{Actor Model}
-\begin{frame}{Actor Model}
-    \begin{itemize}
-        \item Actors sind computation units mit State, Behaviour, Mailbox
-        \item kommunizieren über Nachrichten
-        \item verarbeiten immer nur eine Nachricht
-        \item verarbeiten Nachrichten in der Reihenfolge in der sie empfangen wurden
-    \end{itemize}
-\end{frame}
-
-\begin{frame}{HelloWorldActor}
-    \footnotesize
-    \code{./code/actors/HelloWorldActor.java}
-\end{frame}
-
-\begin{frame}{Further Methods}
-    \begin{itemize}
-        \item \texttt{preStart(), postStop(), preRestart(), postRestart()}
-        \item \texttt{getSelf()}: Referenz auf sich selbst
-        \item \texttt{getContext()}: Context um weiter Actoren zu erzeugen
-        \item \texttt{getSender()}: Sender der aktuell verarbeiteten Nachricht
-    \end{itemize}
-\end{frame}
-
-\begin{frame}{Actor Creation}
-    Muss auf einen \textbf{Context} aufgerufen werden, entweder \texttt{ActorSystem} oder \texttt{getContext()} von innerhalb eines Actors.
-    
-    Actor beaufsichtigt alle Aktoren die er erstellt hat
-    \footnotesize
-    \code{./code/actors/CreateActor.java} 
-\end{frame}
-
-\begin{frame}{Messages}
-    Muss auf den Empfänger aufgerufen werden
-    \begin{itemize}
-        \item \texttt{tell(Object message, ActorRef sender)}: asyncron, nicht blockierend
-        \item \texttt{Future<?> Patterns.ask(ActorRef target, Object msg, Timeout timeout)}: kann awaited werden, sollte man aber vermeiden
-    \end{itemize}
-\end{frame}
-
-\begin{frame}{Running Actors}
-    \begin{itemize}
-        \item \texttt{ActorSystem.create(String name)}: Erzeugt ein ActorSystem
-        \item \texttt{void stop(ActorRef actorToStop)}: Muss auf eine ActorRefFactory aufgerufen werden (ActorSystem, Context)
-        \item \texttt{PoisonPill.getInstance()}: Kann als Nachricht an einen Actor gesendet werden
-        \item \texttt{ActorSystem.terminater()}: Terminiert ActorSystem
-    \end{itemize}
-\end{frame}
-
-\section{Klausuraufgabe SS21}
-
-\section{Einführung in Compilerbau}
-
-\begin{frame}{Compiler in ProPa}
-	\begin{itemize}
-		\item Ein bisschen...
-		\begin{itemize}
-                        \item Lexikalische Analyse
-			\item Syntaktische Analyse (Parsen)
-			\item \textcolor{gray}{Semantische Analyse, Optimierung}
-			\item Codegenerierung
-		\end{itemize}
-		\pause
-		\item Klausur:
-		\begin{itemize}
-			\item SLL(k)-Form beweisen
-			\item Rekursiven Abstiegsparser schreiben/vervollständigen
-			\item First/Follow-Mengen berechnen
-			\item Java-Bytecode
-				% Zeigen: Java-BC-Aufgabe (21SS), Code-Generierung nächste Mittwoch und Freitag (findet noch statt)
-		\end{itemize}
-	\end{itemize}
 \end{frame}
 
 \section{Compiler}
@@ -382,7 +308,7 @@
   \begin{alignat*}{2}
     & Expr   & \; \to \; & Expr \; \texttt{+} \; Term \\
           && \mid \;\; & Term \\
-    & Term   & \; \to \; & Term \; \texttt{+} \; Factor \\
+    & Term   & \; \to \; & Term \; \texttt{*} \; Factor \\
             && \mid \;\; & Factor \\
     & Factor & \; \to \; & \texttt{(} \; Expr \; \texttt{)} \; \mid \; \texttt{id}
   \end{alignat*}
@@ -439,7 +365,7 @@
       \begin{alignat*}{2}
         & Expr   & \; \to \; & Expr \; \texttt{+} \; Term \\
               && \mid \;\; & Term \\
-        & Term   & \; \to \; & Term \; \texttt{+} \; Factor \\
+        & Term   & \; \to \; & Term \; \texttt{*} \; Factor \\
                 && \mid \;\; & Factor \\
         & Factor & \; \to \; & \texttt{(} \; Expr \; \texttt{)} \; \mid \; \texttt{id}
       \end{alignat*}
@@ -481,7 +407,7 @@
       \begin{alignat*}{2}
         & Expr   & \; \to \; & Expr \; \texttt{+} \; Term \\
               && \mid \;\; & Term \\
-        & Term   & \; \to \; & Term \; \texttt{+} \; Factor \\
+        & Term   & \; \to \; & Term \; \texttt{*} \; Factor \\
                 && \mid \;\; & Factor \\
         & Factor & \; \to \; & \texttt{(} \; Expr \; \texttt{)} \; \mid \; \texttt{id}
       \end{alignat*}
@@ -609,5 +535,7 @@
 		\end{itemize}
 	\end{itemize}
 \end{frame}
+
+\section{WS2122}
 
 \end{document}
