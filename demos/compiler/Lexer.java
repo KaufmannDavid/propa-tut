@@ -1,4 +1,4 @@
 public interface Lexer {
-  String current();
+  Terminal current();
   void lex();
 }
