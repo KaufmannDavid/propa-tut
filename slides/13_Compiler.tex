@@ -536,6 +536,41 @@
 	\end{itemize}
 \end{frame}
 
+\begin{frame}{AST}
+    \begin{columns}
+       \begin{column}{0.5\textwidth}
+        \begin{itemize} 
+            \item Der Parser soll einen AST zurückgeben
+            \item Verwendet die Klassen aus \texttt{./demos/compiler/Exp.java}
+            \item Am Ende soll der Parser einen Baum wie links zurückgeben
+        \end{itemize}
+    \end{column}
+       \begin{column}{0.5\textwidth}
+           Beispiel:
+           $$(a+b+c)/a$$
+           \begin{figure}
+               \begin{tikzpicture}[
+                  level distance=7.5mm,
+                  sibling distance=15mm
+                ]
+                  \node {Div}
+                    child {
+                      node {Plus}
+                        child {
+                          node {Plus}
+                            child {node {a}}
+                            child {node {b}}
+                        }
+                        child {node {c}}
+                    }
+                    child {node {a}}
+                  ;
+                \end{tikzpicture}
+           \end{figure}
+       \end{column}
+    \end{columns}
+\end{frame}
+
 \section{WS2122}
 
 \end{document}
