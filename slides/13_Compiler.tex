@@ -418,7 +418,7 @@
         & Expr   & \; \to \; & \; Term \; Expr' \\
         & Expr'  & \; \to \; & \; \texttt{+} \; Term \; Expr' \\
                 && \mid \;\; & \; \epsilon \\
-        & Term   & \; \to \; & \; Term \; Expr' \\
+        & Term   & \; \to \; & \; Factor \; Term' \\
         & Term'  & \; \to \; & \; \texttt{*} \; Factor \; Term' \\
                 && \mid \;\; & \; \epsilon \\
         & Factor & \; \to \; & \texttt{(} \; Expr \; \texttt{)} \; \mid \; \texttt{id}
@@ -457,7 +457,7 @@
     & E      & \; \to \; & \; T \; EList \\
     & EList  & \; \to \; & \; \texttt{+} \; T \; EList \\
             && \mid \;\; & \; \epsilon \\
-    & T      & \; \to \; & \; T \; EList \\
+    & T      & \; \to \; & \; F \; TList \\
     & TList  & \; \to \; & \; \texttt{*} \; F \; TList \\
             && \mid \;\; & \; \epsilon \\
     & F      & \; \to \; & \texttt{(} \; E \; \texttt{)} \; \mid \; \texttt{id}
