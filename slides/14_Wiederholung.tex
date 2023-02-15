@@ -175,6 +175,16 @@
         \item \texttt{putfield name:type}: schreibt Wert von Typ type in Klassenvariable mit Name name. Auf dem Stack müssen der Wert und die Objectreferenz liegen
     \end{itemize}
 \end{frame}
+
+\begin{frame}{Arrays}
+    \begin{itemize}
+        \item \texttt{newarray type}: erzeugt ein neues Array. Verwendet das oberste Element auf dem Stack als Länge
+        \item \texttt{astore}: speichern einer Referenz (z.B. Array)
+        \item \texttt{iaload}: läd Wert von Index aus Array. Stack muss von oben belegt sein mit: Index, Array Referenz.
+        \item \texttt{iastore}: speichert Integer an Index in Array. Stack muss aussehen von oben: Wert, Index, Array Referenz
+    \end{itemize}
+\end{frame}
+
 \section{Klausuraufgabe SS17 Aufgabe 12}
 
 \section{Evaluation}
